@@ -15,6 +15,8 @@ Description
 Exposes some sane JSON API through Deluge WebUI (missing out of the box or restyled) so that you can manipulate
 Deluge from your programs using HTTP requests.
 
+Deluge is a lightweight, Free Software, cross-platform BitTorrent client. Download it at http://deluge-torrent.org/
+
 
 Installation
 ------------
