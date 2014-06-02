@@ -23,13 +23,17 @@ Requirements
 Installation
 ------------
 
-    * Open Deluge Web UI, go to "Preferences -> Plugins -> Install plugin" and choose `webapi.egg` file.
+    * Get plugin egg file, e.g. `deluge_webapi-0.1.0-py2.7.egg`.
+
+    * **IMORTANT**: rename it - strip `deluge_` from its name, e.g. `webapi-0.1.0-py2.7.egg`.
+
+    * Open Deluge Web UI, go to "Preferences -> Plugins -> Install plugin" and choose `webapi-0.1.0-py2.7.egg` file.
 
         .. note::
 
             To build .egg file from source code yourself use `python setup.py bdist_egg` command in source code directory.
 
-    * Activate `WebAPI` plugin.
+    * Activate `webapi` plugin.
 
     * You're ready.
 
