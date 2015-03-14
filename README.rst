@@ -6,6 +6,9 @@ https://github.com/idlesign/deluge-webapi
 .. image:: https://pypip.in/d/deluge-webapi/badge.png
         :target: https://crate.io/packages/deluge-webapi
 
+.. image:: https://landscape.io/github/idlesign/deluge-webapi/master/landscape.svg?style=plastic
+   :target: https://landscape.io/github/idlesign/deluge-webapi/master
+
 
 Description
 -----------

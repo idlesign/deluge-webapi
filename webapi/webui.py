@@ -6,7 +6,6 @@ from deluge.ui.web.json_api import export as export_api
 from deluge.plugins.pluginbase import WebPluginBase
 from twisted.internet.defer import Deferred
 
-from webapi import VERSION
 
 LOGGER = logging.getLogger(__name__)
 
@@ -64,10 +63,10 @@ class WebUI(WebPluginBase):
             options = {}
 
         if common.is_magnet(metainfo):
-            LOGGER.info('Adding torrent from magnet URI `%s` using options `%s` ...' % (metainfo, options))
+            LOGGER.info('Adding torrent from magnet URI `%s` using options `%s` ...', metainfo, options)
             client.core.add_torrent_magnet(metainfo, options)
         else:
-            LOGGER.info('Adding torrent from base64 string using options `%s` ...' % options)
+            LOGGER.info('Adding torrent from base64 string using options `%s` ...', options)
             client.core.add_torrent_file(None, metainfo, options)
         return True
 
@@ -80,4 +79,5 @@ class WebUI(WebPluginBase):
     @export_api
     def get_api_version(self):
         """Returns WebAPI plugin version."""
+        from webapi import VERSION
         return '.'.join(map(str, VERSION))
