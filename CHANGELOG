@@ -5,6 +5,7 @@ deluge-webapi changelog
 Unreleased
 ----------
 + `add_torrent` now returns torrent id (hash) (see #5).
++ `remove_torrent` now returns the result of core function instad of `True`.
 
 
 v0.1.0

@@ -78,8 +78,7 @@ class WebUI(WebPluginBase):
     @export_api
     def remove_torrent(self, torrent_id, remove_data=False):
         """Removes a given torrent. Optionally can remove data."""
-        client.core.remove_torrent(torrent_id, remove_data)
-        return True
+        return client.core.remove_torrent(torrent_id, remove_data)
 
     @export_api
     def get_api_version(self):
