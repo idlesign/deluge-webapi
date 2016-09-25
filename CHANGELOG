@@ -1,7 +1,12 @@
 deluge-webapi changelog
 =======================
 
+
+Unreleased
+----------
++ `add_torrent` now returns torrent id (hash) (see #5).
+
+
 v0.1.0
 ------
 + Basic functionality.
-

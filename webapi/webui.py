@@ -1,10 +1,11 @@
 import logging
 
+from twisted.internet.defer import Deferred
+
 from deluge import component, common
 from deluge.ui.client import client
 from deluge.ui.web.json_api import export as export_api
 from deluge.plugins.pluginbase import WebPluginBase
-from twisted.internet.defer import Deferred
 
 
 LOGGER = logging.getLogger(__name__)
@@ -56,19 +57,23 @@ class WebUI(WebPluginBase):
         """Adds a torrent with the given options.
         metainfo could either be base64 torrent data or a magnet link.
 
+        Returns `torrent_id` string or None.
+
         Available options are listed in deluge.core.torrent.TorrentOptions.
 
+        :rtype: None|str
         """
         if options is None:
             options = {}
 
         if common.is_magnet(metainfo):
             LOGGER.info('Adding torrent from magnet URI `%s` using options `%s` ...', metainfo, options)
-            client.core.add_torrent_magnet(metainfo, options)
+            result = client.core.add_torrent_magnet(metainfo, options)
         else:
             LOGGER.info('Adding torrent from base64 string using options `%s` ...', options)
-            client.core.add_torrent_file(None, metainfo, options)
-        return True
+            result = client.core.add_torrent_file(None, metainfo, options)
+
+        return result
 
     @export_api
     def remove_torrent(self, torrent_id, remove_data=False):
