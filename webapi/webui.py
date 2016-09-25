@@ -45,6 +45,7 @@ class WebUI(WebPluginBase):
         response = Deferred()
 
         deffered_torrents = proxy.get_torrents_status(filter_dict, filter_fields)
+
         def on_complete(torrents_dict):
             document['torrents'] = torrents_dict.values()
             response.callback(document)
