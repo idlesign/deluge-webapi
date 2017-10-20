@@ -25,7 +25,7 @@ __url__ = 'https://github.com/idlesign/deluge-webapi'
 
 
 setup(
-    name='deluge-webapi',
+    name=__plugin_name__,
     version=__version__,
     url=__url__,
 
@@ -60,12 +60,12 @@ setup(
         'Intended Audience :: End Users/Desktop',
     ],
 
-    entry_points='''
+    entry_points="""
     [deluge.plugin.core]
-    %(plugin_name)s = %(module_name)s:CorePlugin
+    %s = %s:CorePlugin
     [deluge.plugin.gtkui]
-    %(plugin_name)s = %(module_name)s:GtkUIPlugin
+    %s = %s:GtkUIPlugin
     [deluge.plugin.web]
-    %(plugin_name)s = %(module_name)s:WebUIPlugin
-    ''' % {'plugin_name': __plugin_name__, 'module_name': __plugin_name__.lower()}
+    %s = %s:WebUIPlugin
+    """ % ((__plugin_name__, __plugin_name__.lower())*3)
 )

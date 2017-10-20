@@ -7,7 +7,6 @@ from deluge.ui.client import client
 from deluge.ui.web.json_api import export as export_api
 from deluge.plugins.pluginbase import WebPluginBase
 
-
 LOGGER = logging.getLogger(__name__)
 
 
@@ -67,6 +66,10 @@ class WebUI(WebPluginBase):
         if options is None:
             options = {}
 
+        coreconfig = component.get('CoreConfig')
+        options.update({'download_location': coreconfig.get("download_location")})
+
+        metainfo = metainfo.encode()
         if common.is_magnet(metainfo):
             LOGGER.info('Adding torrent from magnet URI `%s` using options `%s` ...', metainfo, options)
             result = client.core.add_torrent_magnet(metainfo, options)
