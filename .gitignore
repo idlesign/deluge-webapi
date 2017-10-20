@@ -6,4 +6,5 @@ __pycache__
 *.pyc
 *.pyo
 *.egg-info
+build/
 docs/_build/
