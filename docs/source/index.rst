@@ -55,7 +55,7 @@ Get involved into deluge-webapi
 **Spread the word.** If you have some tips and tricks or any other words in mind that you think might be of interest for the others — publish it.
 
 
-The tip
--------
+More things
+-----------
 
 You might be interested in considering other Deluge plugins at http://dev.deluge-torrent.org/wiki/Plugins/
