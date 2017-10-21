@@ -30,17 +30,17 @@ Supported methods:
 
 Deluge is a lightweight, Free Software, cross-platform BitTorrent client. Download it at http://deluge-torrent.org/
 
+**IMORTANT**: Plugin works Deluge beginning with 1.3.15 version
+
 
 Installation
 ------------
 
-1. Get plugin egg file, e.g. `deluge_webapi-0.1.0-py2.7.egg`.
+1. Get plugin egg file, from [dist](dist/) folder.
 
-2. **IMORTANT**: rename it - strip `deluge_` from its name, e.g. `webapi-0.1.0-py2.7.egg`.
+2. Open Deluge Web UI, go to "Preferences -> Plugins -> Install plugin" and choose egg file.
 
-3. Open Deluge Web UI, go to "Preferences -> Plugins -> Install plugin" and choose `webapi-0.1.0-py2.7.egg` file.
-
-4. Activate `webapi` plugin.
+3. Activate `WebAPI` plugin.
 
 
 .. note::

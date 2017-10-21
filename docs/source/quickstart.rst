@@ -39,7 +39,7 @@ Hints
 
 7. Make sure Deluge WebUI is connected to Deluge daemon that makes actual torrent processing.
 
-   * Send {"id": 1, "method": "web.connected", "params": []} and verify no error.
+   * Send {"id": 1, "method": "auth.check_session", "params": []} and verify no error.
 
 8. WebAPI method names start with `webapi.`. (E.g.: `webapi.add_torrent` to call `add_torrent` function).
 
