@@ -23,7 +23,7 @@ Requirements
 Installation
 ------------
 
-    * Get plugin egg file, from [dist](https://github.com/idlesign/deluge-webapi/tree/master/dist) folder.
+    * Get plugin egg file, from ``dist/`` (https://github.com/idlesign/deluge-webapi/tree/master/dist) directory.
 
     * Open Deluge Web UI, go to "Preferences -> Plugins -> Install plugin" and choose egg file.
 
