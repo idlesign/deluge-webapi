@@ -27,13 +27,13 @@ Supported methods:
 
 Deluge is a lightweight, Free Software, cross-platform BitTorrent client. Download it at http://deluge-torrent.org/
 
-**IMORTANT**: Plugin tested on Deluge 1.3.15.
+.. note:: Plugin tested on Deluge 1.3.15.
 
 
 Installation
 ------------
 
-1. Get plugin egg file, from [dist](dist/) folder.
+1. Get plugin egg file, from [dist](https://github.com/idlesign/deluge-webapi/tree/master/dist) folder.
 
 2. Open Deluge Web UI, go to "Preferences -> Plugins -> Install plugin" and choose egg file.
 
