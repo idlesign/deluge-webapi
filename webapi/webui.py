@@ -68,7 +68,7 @@ class WebUI(WebPluginBase):
 
         coreconfig = component.get('CoreConfig')
 
-        if 'download_location' not in options.keys() or options.get('download_location') == 'download_location':
+        if 'download_location' not in options.keys():
             options.update({'download_location': coreconfig.get("download_location")})
 
         metainfo = metainfo.encode()
