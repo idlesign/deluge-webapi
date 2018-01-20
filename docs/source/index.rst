@@ -58,4 +58,6 @@ Get involved into deluge-webapi
 More things
 -----------
 
-You might be interested in considering other Deluge plugins at http://dev.deluge-torrent.org/wiki/Plugins/
+* You might be interested in considering other Deluge plugins at http://dev.deluge-torrent.org/wiki/Plugins/
+* Or you might be interested in a PHP Deluge API wrapper: https://github.com/kaysond/deluge-php
+
