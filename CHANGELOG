@@ -2,9 +2,9 @@ deluge-webapi changelog
 =======================
 
 
-Unreleased
-----------
-* Fixed add_rorrent download_location not honored.
+v0.2.1
+------
+* Fixed add_rorrent download_location not honored (see #8).
 
 
 v0.2.0
