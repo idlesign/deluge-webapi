@@ -67,7 +67,9 @@ class WebUI(WebPluginBase):
             options = {}
 
         coreconfig = component.get('CoreConfig')
-        options.update({'download_location': coreconfig.get("download_location")})
+
+        if 'download_location' not in options.keys():
+            options.update({'download_location': coreconfig.get("download_location")})
 
         metainfo = metainfo.encode()
         if common.is_magnet(metainfo):
