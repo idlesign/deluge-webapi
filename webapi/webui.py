@@ -5,9 +5,12 @@ from twisted.internet.defer import Deferred
 from deluge import component, common
 from deluge.ui.client import client
 from deluge.ui.web.json_api import export as export_api
+from deluge.ui.web.json_api import JSON
 from deluge.plugins.pluginbase import WebPluginBase
+from twisted.web import http
 
 LOGGER = logging.getLogger(__name__)
+
 
 
 class WebUI(WebPluginBase):
