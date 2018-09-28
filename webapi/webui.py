@@ -10,6 +10,7 @@ from deluge.plugins.pluginbase import WebPluginBase
 LOGGER = logging.getLogger(__name__)
 
 
+
 class WebUI(WebPluginBase):
 
     def enable(self):

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glade-interface>
+  <!-- interface-requires gtk+ 2.24 -->
+  <!-- interface-naming-policy toplevel-contextual -->
+  <widget class="GtkWindow" id="window1">
+    <property name="can_focus">False</property>
+    <child>
+      <widget class="GtkHBox" id="prefs_box">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <child>
+          <widget class="GtkLayout" id="layout1">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <child>
+              <widget class="GtkCheckButton" id="enable_cors">
+                <property name="label" translatable="yes">enable CORS (cross-origin request)</property>
+                <property name="width_request">247</property>
+                <property name="height_request">80</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">False</property>
+                <property name="use_action_appearance">False</property>
+                <property name="draw_indicator">True</property>
+              </widget>
+              <packing>
+                <property name="x">18</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkLabel" id="label1">
+                <property name="width_request">152</property>
+                <property name="height_request">21</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="xalign">0</property>
+                <property name="yalign">0</property>
+                <property name="label" translatable="yes">Allowed domain name :</property>
+              </widget>
+              <packing>
+                <property name="x">19</property>
+                <property name="y">60</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkEntry" id="new_domain">
+                <property name="width_request">153</property>
+                <property name="height_request">27</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="invisible_char">●</property>
+                <property name="primary_icon_activatable">False</property>
+                <property name="secondary_icon_activatable">False</property>
+                <property name="primary_icon_sensitive">True</property>
+                <property name="secondary_icon_sensitive">True</property>
+              </widget>
+              <packing>
+                <property name="x">67</property>
+                <property name="y">286</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkButton" id="add_button">
+                <property name="label" translatable="yes">Add</property>
+                <property name="width_request">49</property>
+                <property name="height_request">27</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_action_appearance">False</property>
+              </widget>
+              <packing>
+                <property name="x">16</property>
+                <property name="y">286</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkTreeView" id="listview_allowed_domains">
+                <property name="width_request">263</property>
+                <property name="height_request">194</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+              </widget>
+              <packing>
+                <property name="x">16</property>
+                <property name="y">84</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkScrolledWindow" id="scrolledwindow_allowed_domains">
+                <property name="width_request">356</property>
+                <property name="height_request">197</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="hscrollbar_policy">automatic</property>
+                <property name="vscrollbar_policy">automatic</property>
+                <child>
+                  <placeholder/>
+                </child>
+              </widget>
+              <packing>
+                <property name="x">16</property>
+                <property name="y">81</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkButton" id="remove_button">
+                <property name="label" translatable="yes">Remove</property>
+                <property name="width_request">69</property>
+                <property name="height_request">27</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_action_appearance">False</property>
+              </widget>
+              <packing>
+                <property name="x">221</property>
+                <property name="y">286</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkButton" id="remove_all_button">
+                <property name="label" translatable="yes">Remove all</property>
+                <property name="width_request">82</property>
+                <property name="height_request">27</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_action_appearance">False</property>
+              </widget>
+              <packing>
+                <property name="x">290</property>
+                <property name="y">286</property>
+              </packing>
+            </child>
+          </widget>
+          <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+      </widget>
+    </child>
+  </widget>
+</glade-interface>
