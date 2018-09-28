@@ -24,7 +24,7 @@ __license__ = 'BSD 3-Clause License'
 __url__ = 'https://github.com/idlesign/deluge-webapi'
 
 
-__pkg_data__ = {__plugin_name__.lower(): ["data/*"]}
+__pkg_data__ = {__plugin_name__.lower(): ['data/*']}
 
 setup(
     name=__plugin_name__,

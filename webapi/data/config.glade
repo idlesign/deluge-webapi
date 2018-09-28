@@ -75,7 +75,7 @@
               </packing>
             </child>
             <child>
-              <widget class="GtkTreeView" id="treeview1">
+              <widget class="GtkTreeView" id="listview_allowed_domains">
                 <property name="width_request">263</property>
                 <property name="height_request">194</property>
                 <property name="visible">True</property>
@@ -87,7 +87,7 @@
               </packing>
             </child>
             <child>
-              <widget class="GtkScrolledWindow" id="scrolledwindow1">
+              <widget class="GtkScrolledWindow" id="scrolledwindow_allowed_domains">
                 <property name="width_request">356</property>
                 <property name="height_request">197</property>
                 <property name="visible">True</property>

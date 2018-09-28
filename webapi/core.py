@@ -11,8 +11,8 @@ from deluge.core.rpcserver import export
 LOGGER = logging.getLogger(__name__)
 
 DEFAULT_PREFS = {
-    "enable_cors"         : False,
-    "allowed_origin"      : []
+    'enable_cors' : False,
+    'allowed_origin' : []
 }
 
 class Core(CorePluginBase):
@@ -22,8 +22,8 @@ class Core(CorePluginBase):
         LOGGER.info('Enabling WebAPI plugin CORE ...')
         self.JSON_instance = component.get('JSON')
         self.patched = False
-        self.config = deluge.configmanager.ConfigManager("webapi.conf", DEFAULT_PREFS)
-        if (self.config["enable_cors"] == True):
+        self.config = deluge.configmanager.ConfigManager('webapi.conf', DEFAULT_PREFS)
+        if (self.config['enable_cors'] == True):
             self.patch_web_ui()
 
     def disable(self):
@@ -36,15 +36,15 @@ class Core(CorePluginBase):
 
     @export
     def set_config(self, config):
-        "sets the config dictionary"
+        """sets the config dictionary"""
         for key in config.keys():
             self.config[key] = config[key]
         self.config.save()
-        if (self.config["enable_cors"] == True):
-            self.patch_web_ui()
-        elif (self.config["enable_cors"] == False):
-            self.unpatch_web_ui()
 
+        if self.config['enable_cors']:
+            self.patch_web_ui()
+        elif not self.config['enable_cors']:
+            self.unpatch_web_ui()
 
     @export
     def get_config(self):
@@ -52,7 +52,7 @@ class Core(CorePluginBase):
         return self.config.config
 
     def patch_web_ui(self):
-        if self.patched == True:
+        if self.patched:
             return
         LOGGER.info('Patching webui for CORS...')
         self.old_render = self.JSON_instance.render
@@ -62,7 +62,7 @@ class Core(CorePluginBase):
         self.patched = True
 
     def unpatch_web_ui(self):
-        if self.patched == False:
+        if not self.patched:
             return
         LOGGER.info('Unpatching webui for CORS...')
         if (self.old_render):
@@ -72,7 +72,7 @@ class Core(CorePluginBase):
         self.patched = False
 
     def render_patch(self, request):
-        if request.method == "OPTIONS":
+        if request.method == 'OPTIONS':
             request.setResponseCode(http.OK)
             origin = request.getHeader('Origin')
             if origin in self.config['allowed_origin']:
