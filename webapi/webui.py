@@ -7,11 +7,15 @@ from deluge.ui.client import client
 from deluge.ui.web.json_api import export as export_api
 from deluge.plugins.pluginbase import WebPluginBase
 
+from common import get_resource
+
 LOGGER = logging.getLogger(__name__)
 
 
 
 class WebUI(WebPluginBase):
+
+    scripts = [get_resource("webapi.js")]
 
     def enable(self):
         """Triggers when plugin is enabled."""
