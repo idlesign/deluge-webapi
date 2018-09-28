@@ -1,16 +1,14 @@
 import logging
+
 import gtk
-
-from deluge.log import LOG as log
-from deluge.ui.client import client
+from deluge import component
 from deluge.plugins.pluginbase import GtkPluginBase
-import deluge.component as component
-import deluge.common
+from deluge.ui.client import client
 
-from common import get_resource
-
+from .common import get_resource
 
 LOGGER = logging.getLogger(__name__)
+
 
 class GtkUI(GtkPluginBase):
 
@@ -19,7 +17,8 @@ class GtkUI(GtkPluginBase):
     def enable(self):
         """Triggers when plugin is enabled."""
         LOGGER.info('Enabling WebAPI plugin GTK ...')
-        self.glade = gtk.glade.XML(get_resource("config.glade"))
+
+        self.glade = gtk.glade.XML(get_resource('config.glade'))
 
         component.get('Preferences').add_page('WebAPI', self.glade.get_widget('prefs_box'))
         component.get('PluginManager').register_hook('on_apply_prefs', self.on_apply_prefs)

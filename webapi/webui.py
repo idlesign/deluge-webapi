@@ -1,16 +1,14 @@
 import logging
 
-from twisted.internet.defer import Deferred
-
 from deluge import component, common
+from deluge.plugins.pluginbase import WebPluginBase
 from deluge.ui.client import client
 from deluge.ui.web.json_api import export as export_api
-from deluge.plugins.pluginbase import WebPluginBase
+from twisted.internet.defer import Deferred
 
-from common import get_resource
+from .common import get_resource
 
 LOGGER = logging.getLogger(__name__)
-
 
 
 class WebUI(WebPluginBase):
@@ -77,9 +75,11 @@ class WebUI(WebPluginBase):
             options.update({'download_location': coreconfig.get("download_location")})
 
         metainfo = metainfo.encode()
+
         if common.is_magnet(metainfo):
             LOGGER.info('Adding torrent from magnet URI `%s` using options `%s` ...', metainfo, options)
             result = client.core.add_torrent_magnet(metainfo, options)
+
         else:
             LOGGER.info('Adding torrent from base64 string using options `%s` ...', options)
             result = client.core.add_torrent_file(None, metainfo, options)
