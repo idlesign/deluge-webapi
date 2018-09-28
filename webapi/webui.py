@@ -15,7 +15,7 @@ LOGGER = logging.getLogger(__name__)
 
 class WebUI(WebPluginBase):
 
-    scripts = [get_resource("webapi.js")]
+    scripts = [get_resource('webapi.js')]
 
     def enable(self):
         """Triggers when plugin is enabled."""
