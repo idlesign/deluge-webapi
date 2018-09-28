@@ -23,7 +23,7 @@ class Core(CorePluginBase):
         self.JSON_instance = component.get('JSON')
         self.patched = False
         self.config = deluge.configmanager.ConfigManager('webapi.conf', DEFAULT_PREFS)
-        if (self.config['enable_cors'] == True):
+        if self.config['enable_cors']:
             self.patch_web_ui()
 
     def disable(self):
@@ -65,9 +65,9 @@ class Core(CorePluginBase):
         if not self.patched:
             return
         LOGGER.info('Unpatching webui for CORS...')
-        if (self.old_render):
+        if self.old_render:
             self.JSON_instance.render = self.old_render
-        if (self.old_send_request):
+        if self.old_send_request:
             self.JSON_instance._send_response = self.old_send_request
         self.patched = False
 
