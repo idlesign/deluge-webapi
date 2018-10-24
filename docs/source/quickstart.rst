@@ -27,19 +27,19 @@ Hints
 
 5. Login beforehand.
 
-   * Send {"id": 1, "method": "auth.login", "params": ["your_password_here"]} and receive cookies with auth information.
+   * Send ``{"id": 1, "method": "auth.login", "params": ["your_password_here"]}`` and receive cookies with auth information.
 
    * Use those cookies for every request.
 
 6. API answers with an error with the following JSON:
 
-   {"error": "Some error description.", "id": 1, "result": False}
+   ``{"error": "Some error description.", "id": 1, "result": False}``
 
    Check responses for `error` field.
 
 7. Make sure Deluge WebUI is connected to Deluge daemon that makes actual torrent processing.
 
-   * Send {"id": 1, "method": "auth.check_session", "params": []} and verify no error.
+   * Send ``{"id": 1, "method": "auth.check_session", "params": []}`` and verify no error.
 
 8. WebAPI method names start with `webapi.`. (E.g.: `webapi.add_torrent` to call `add_torrent` function).
 
@@ -53,40 +53,44 @@ API Methods
     WebAPI uses torrent hashes to identify torrents, so torrent ID is the same as hash.
 
 
-**Get torrents info**
+Get torrents info
+~~~~~~~~~~~~~~~~~
 
-`get_torrents(ids=None, params=None)`
+``get_torrents(ids=None, params=None)``
 
 Returns information about all or a definite torrent.
 Returned information can be filtered by supplying wanted parameter names.
 
-    {"id": 1, "method": "webapi.get_torrents", "params": [["torrent_hash1", "torrent_hash2"], ["name", "comment"]]}
+    ``{"id": 1, "method": "webapi.get_torrents", "params": [["torrent_hash1", "torrent_hash2"], ["name", "comment"]]}``
 
 
-**Add torrent**
+Add torrent
+~~~~~~~~~~~
 
-`add_torrent(metainfo, options=None)`
+``add_torrent(metainfo, options=None)``
 
 Adds a torrent with the given options.
 `metainfo` could either be base64 torrent data or a magnet link.
 
-    {"id": 1, "method": "webapi.add_torrent", "params": ["base64_encoded_torrent_file_contents", {"download_location": "/home/idle/downloads/"}]}
+    ``{"id": 1, "method": "webapi.add_torrent", "params": ["base64_encoded_torrent_file_contents", {"download_location": "/home/idle/downloads/"}]}``
 
 
-**Remove torrent**
+Remove torrent
+~~~~~~~~~~~~~~
 
-`remove_torrent(torrent_id, remove_data=False)`
+``remove_torrent(torrent_id, remove_data=False)``
 
 Removes a given torrent. Optionally can remove data.
 
-    {"id": 1, "method": "webapi.remove_torrent", "params": ["torrent_hash3", True]}
+    ``{"id": 1, "method": "webapi.remove_torrent", "params": ["torrent_hash3", True]}``
 
 
-**Get API version**
+Get API version
+~~~~~~~~~~~~~~~
 
-`get_api_version()`
+``get_api_version()``
 
 Returns WebAPI plugin version.
 
-    {"id": 1, "method": "webapi.get_api_version", "params": []}
+    ``{"id": 1, "method": "webapi.get_api_version", "params": []}``
 
