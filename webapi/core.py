@@ -19,7 +19,6 @@ class Core(CorePluginBase):
     def enable(self):
         LOGGER.info('Enabling WebAPI plugin CORE ...')
 
-        self.JSON_instance = component.get('JSON')
         self.patched = False
         self.config = deluge.configmanager.ConfigManager('webapi.conf', DEFAULT_PREFS)
 
@@ -57,10 +56,13 @@ class Core(CorePluginBase):
 
         LOGGER.info('Patching webui for CORS...')
 
-        self.old_render = self.JSON_instance.render
-        self.old_send_request = self.JSON_instance._send_response
-        self.JSON_instance.render = self.render_patch
-        self.JSON_instance._send_response = self._send_response_patch
+        cmp_json = component.get('JSON')
+
+        self.old_render = cmp_json.render
+        self.old_send_request = cmp_json._send_response
+        cmp_json.render = self.render_patch
+        cmp_json._send_response = self._send_response_patch
+
         self.patched = True
 
     def unpatch_web_ui(self):
@@ -70,11 +72,9 @@ class Core(CorePluginBase):
 
         LOGGER.info('Unpatching webui for CORS...')
 
-        if self.old_render:
-            self.JSON_instance.render = self.old_render
-
-        if self.old_send_request:
-            self.JSON_instance._send_response = self.old_send_request
+        cmp_json = component.get('JSON')
+        cmp_json.render = self.old_render
+        cmp_json._send_response = self.old_send_request
 
         self.patched = False
 
