@@ -1,12 +1,16 @@
 
 WebApiPanel = Ext.extend(Ext.form.FormPanel, {
+
+
     constructor: function(config) {
+
         config = Ext.apply({
+            title: _('WebAPI'),
             border: false,
-            title: _("WebAPI"),
             labelWidth: 10,
-            autoHeight: true,
+            autoHeight: true
         }, config);
+
         WebApiPanel.superclass.constructor.call(this, config);
     },
     initComponent: function() {
@@ -15,7 +19,7 @@ WebApiPanel = Ext.extend(Ext.form.FormPanel, {
 
         var fieldset = this.add({
             xtype: 'fieldset',
-            title: _('WebApi Settings'),
+            title: _('WebAPI Settings'),
             defaultType: 'checkbox',
             autoHeight: true
         });
@@ -26,7 +30,7 @@ WebApiPanel = Ext.extend(Ext.form.FormPanel, {
             height: 22,
             fieldLabel: '',
             labelSeparator: '',
-            boxLabel: _('enable CORS (cross-origin request)')
+            boxLabel: _('Enable CORS (cross-origin request)')
         }));
 
         this.list = this.add({
@@ -179,7 +183,8 @@ WebApiPanel = Ext.extend(Ext.form.FormPanel, {
 
 
 WebApiPlugin = Ext.extend(Deluge.Plugin, {
-    name: "WebApi",
+
+    name: 'WebAPI',
 
     onDisable: function() {
         deluge.preferences.removePage(this.prefsPage);
@@ -190,4 +195,4 @@ WebApiPlugin = Ext.extend(Deluge.Plugin, {
     }
 });
 
-Deluge.registerPlugin('WebApi', WebApiPlugin);
+Deluge.registerPlugin('WebAPI', WebApiPlugin);
