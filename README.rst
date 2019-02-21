@@ -20,10 +20,10 @@ Deluge from your programs using HTTP requests.
 
 Supported methods:
 
-* get_torrents
-* add_torrent (magnet or file)
-* remove_torrent
-* get_api_version
+* ``get_torrents``
+* ``add_torrent`` (magnet or file)
+* ``remove_torrent``
+* ``get_api_version``
 
 Deluge is a lightweight, Free Software, cross-platform BitTorrent client. Download it at http://deluge-torrent.org/
 
@@ -37,12 +37,12 @@ Installation
 
 2. Open Deluge Web UI, go to "Preferences -> Plugins -> Install plugin" and choose egg file.
 
-3. Activate `WebAPI` plugin.
+3. Activate ``WebAPI`` plugin.
 
 
 .. note::
 
-    To build .egg file from source code yourself use `python setup.py bdist_egg` command in source code directory.
+    To build .egg file from source code yourself use ``python setup.py bdist_egg`` command in source code directory.
 
 
 Documentation
