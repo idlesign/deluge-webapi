@@ -43,6 +43,8 @@ Hints
 
 8. WebAPI method names start with ``webapi.``. (E.g.: ``webapi.add_torrent`` to call ``add_torrent`` function).
 
+9. See https://github.com/idlesign/deluge-webapi/blob/master/webapi/test.py for code sample. Run it for basic debug.
+
 
 Debug
 -----
@@ -61,6 +63,9 @@ For ``deluged-web``:
 .. code-block:: bash
 
     $ deluge-web -L info
+
+
+You can run https://github.com/idlesign/deluge-webapi/blob/master/webapi/test.py for basic test.
 
 
 
