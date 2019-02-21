@@ -17,7 +17,7 @@ WebApiPanel = Ext.extend(Ext.form.FormPanel, {
             xtype: 'fieldset',
             title: _('WebApi Settings'),
             defaultType: 'checkbox',
-            autoHeight: true,
+            autoHeight: true
         });
 
         this.opts.bind('enable_cors', fieldset.add({
@@ -28,7 +28,6 @@ WebApiPanel = Ext.extend(Ext.form.FormPanel, {
             labelSeparator: '',
             boxLabel: _('enable CORS (cross-origin request)')
         }));
-
 
         this.list = this.add({
             xtype: 'listview',
@@ -55,7 +54,7 @@ WebApiPanel = Ext.extend(Ext.form.FormPanel, {
         this.panel = this.add({
             region: 'center',
             autoScroll: true,
-            items: [this.list],
+            items: [this.list]
         });
 
         this.domain_name = this.opts.bind('domain_name', fieldset.add({
@@ -73,26 +72,26 @@ WebApiPanel = Ext.extend(Ext.form.FormPanel, {
             name: 'list_toolbar',
             xtype: 'container',
             layout: 'hbox',
-            items: [{
-                xtype: 'button',
-                text: 'Add',
-            },
-            this.domain_name,
-            {
-                xtype: 'button',
-                text: 'Remove',
-            },
-            {
-                xtype: 'button',
-                text: 'Remove all',
-            }
+            items: [
+                {
+                    xtype: 'button',
+                    text: 'Add'
+                },
+                this.domain_name,
+                {
+                    xtype: 'button',
+                    text: 'Remove'
+                },
+                {
+                    xtype: 'button',
+                    text: 'Remove all'
+                }
             ]
         });
 
         this.toolbar.getComponent(0).setHandler(this.addDomain, this);
         this.toolbar.getComponent(2).setHandler(this.removeDomain, this);
         this.toolbar.getComponent(3).setHandler(this.removeAllDomain, this);
-
 
         deluge.preferences.on('show', this.onPreferencesShow, this);
     },
@@ -114,7 +113,7 @@ WebApiPanel = Ext.extend(Ext.form.FormPanel, {
     },
 
     onDomainSelect: function (dv, selections) {
-        if (selections.length == 0) return;
+        if (selections.length === 0) return;
         var r = dv.getRecords(selections)[0];
         this.selectedDomain = r.get('domain');
     },
@@ -141,19 +140,20 @@ WebApiPanel = Ext.extend(Ext.form.FormPanel, {
     onPreferencesShow: function () {
         deluge.client.webapi.get_config({
             success: function (config) {
-            if (!Ext.isEmpty(config['enable_cors'])) {
-                config['enable_cors'] = config['enable_cors'];
-            }
-            if (!Ext.isEmpty(config['allowed_origin'])) {
-                config['allowed_origin'] = config['allowed_origin'];
-            }
-            this.allowedDomains = config['allowed_origin'];
-            this.updateDomainsGrid();
-            this.opts.set(config);
+                if (!Ext.isEmpty(config['enable_cors'])) {
+                    config['enable_cors'] = config['enable_cors'];
+                }
+                if (!Ext.isEmpty(config['allowed_origin'])) {
+                    config['allowed_origin'] = config['allowed_origin'];
+                }
+                this.allowedDomains = config['allowed_origin'];
+                this.updateDomainsGrid();
+                this.opts.set(config);
             },
-            scope: this,
+            scope: this
         });
     },
+
     onApply: function(e) {
         var changed = this.opts.getDirty();
         if (!Ext.isObjectEmpty(changed)) {
@@ -162,7 +162,7 @@ WebApiPanel = Ext.extend(Ext.form.FormPanel, {
             }
             deluge.client.webapi.set_config(changed, {
                 success: this.onSetConfig,
-                scope: this,
+                scope: this
             });
         }
         var config = {};
@@ -170,9 +170,11 @@ WebApiPanel = Ext.extend(Ext.form.FormPanel, {
         console.log(config);
         deluge.client.webapi.set_config(config);
     },
+
     onSetConfig: function() {
         this.opts.commit();
-    },
+    }
+
 });
 
 
@@ -184,8 +186,7 @@ WebApiPlugin = Ext.extend(Deluge.Plugin, {
     },
 
     onEnable: function() {
-        this.prefsPage = new WebApiPanel();
-        this.prefsPage = deluge.preferences.addPage(this.prefsPage);
+        this.prefsPage = deluge.preferences.addPage(new WebApiPanel());
     }
 });
 
