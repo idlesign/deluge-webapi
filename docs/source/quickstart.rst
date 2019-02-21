@@ -3,7 +3,7 @@ Quick Reference
 
 .. note::
 
-    First make sure you're using WebUI and `WebAPI` plugin is active under "Preferences -> Plugins".
+    First make sure you're using WebUI and ``WebAPI`` plugin is active under "Preferences -> Plugins".
 
 
 Hints
@@ -11,19 +11,19 @@ Hints
 
 1. WebAPI exists alongside with Deluge built-in JSON API, so all HTTP requests should proceed to
 
-  `http://localhost:8112/json` (or what ever you've got instead of `localhost`)
+  ``http://localhost:8112/json`` (or what ever you've got instead of ``localhost``)
 
 2. Use POST method for HTTP requests.
 
-3. Make requests with valid JSON (including 'Accept: application/json' and 'Content-Type: application/json' HTTP headers).
+3. Make requests with valid JSON (including ``Accept: application/json`` and ``Content-Type: application/json`` HTTP headers).
 
 4. JSON must include the following fields:
 
-   `id` - message number for identity (could be any)
+   ``id`` - message number for identity (could be any, increment it freely)
 
-   `method` - API method name. E.g.: `auth.login`, `webapi.get_torrents`
+   ``method`` - API method name. E.g.: ``auth.login``, ``webapi.get_torrents``
 
-   `params` - API method parameters (depend on method)
+   ``params`` - API method parameters (depend on method)
 
 5. Login beforehand.
 
@@ -33,15 +33,35 @@ Hints
 
 6. API answers with an error with the following JSON:
 
-   ``{"error": "Some error description.", "id": 1, "result": False}``
+   ``{"error": {"message": "Some error description."}, "id": 1, "result": False}``
 
-   Check responses for `error` field.
+   Check responses for ``error`` field.
 
 7. Make sure Deluge WebUI is connected to Deluge daemon that makes actual torrent processing.
 
    * Send ``{"id": 1, "method": "auth.check_session", "params": []}`` and verify no error.
 
-8. WebAPI method names start with `webapi.`. (E.g.: `webapi.add_torrent` to call `add_torrent` function).
+8. WebAPI method names start with ``webapi.``. (E.g.: ``webapi.add_torrent`` to call ``add_torrent`` function).
+
+
+Debug
+-----
+
+If you have problems with plugin activation, you can get log with useful information (look for string containing ``webapi``).
+
+For ``deluged``:
+
+.. code-block:: bash
+
+    $ deluged -d -L info
+
+
+For ``deluged-web``:
+
+.. code-block:: bash
+
+    $ deluge-web -L info
+
 
 
 API Methods
@@ -61,7 +81,9 @@ Get torrents info
 Returns information about all or a definite torrent.
 Returned information can be filtered by supplying wanted parameter names.
 
-    ``{"id": 1, "method": "webapi.get_torrents", "params": [["torrent_hash1", "torrent_hash2"], ["name", "comment"]]}``
+.. code-block::
+
+    {"id": 1, "method": "webapi.get_torrents", "params": [["torrent_hash1", "torrent_hash2"], ["name", "comment"]]}
 
 
 Add torrent
@@ -72,7 +94,9 @@ Add torrent
 Adds a torrent with the given options.
 `metainfo` could either be base64 torrent data or a magnet link.
 
-    ``{"id": 1, "method": "webapi.add_torrent", "params": ["base64_encoded_torrent_file_contents", {"download_location": "/home/idle/downloads/"}]}``
+.. code-block::
+
+    {"id": 1, "method": "webapi.add_torrent", "params": ["base64_encoded_torrent_file_contents", {"download_location": "/home/idle/downloads/"}]}
 
 
 Remove torrent
@@ -82,7 +106,9 @@ Remove torrent
 
 Removes a given torrent. Optionally can remove data.
 
-    ``{"id": 1, "method": "webapi.remove_torrent", "params": ["torrent_hash3", True]}``
+.. code-block::
+
+    {"id": 1, "method": "webapi.remove_torrent", "params": ["torrent_hash3", True]}
 
 
 Get API version
@@ -92,5 +118,7 @@ Get API version
 
 Returns WebAPI plugin version.
 
-    ``{"id": 1, "method": "webapi.get_api_version", "params": []}``
+.. code-block::
+
+    {"id": 1, "method": "webapi.get_api_version", "params": []}
 
