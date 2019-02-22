@@ -39,6 +39,8 @@ Installation
 
 3. Activate ``WebAPI`` plugin.
 
+4. In case you run Client-Server setup, you'll need to instll the plugin both on client and server, see - https://dev.deluge-torrent.org/wiki/Plugins#Client-ServerSetups
+
 
 .. note::
 
