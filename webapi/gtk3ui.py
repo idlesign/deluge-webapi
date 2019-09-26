@@ -1,8 +1,8 @@
 import logging
 
-import gtk
+from gi.repository import Gtk
 from deluge import component
-from deluge.plugins.pluginbase import GtkPluginBase
+from deluge.plugins.pluginbase import Gtk3PluginBase
 from deluge.ui.client import client
 
 from .common import get_resource
@@ -10,7 +10,7 @@ from .common import get_resource
 LOGGER = logging.getLogger(__name__)
 
 
-class GtkUI(GtkPluginBase):
+class Gtk3UI(Gtk3PluginBase):
 
     plugin_id = 'WebAPI'
 
@@ -18,15 +18,15 @@ class GtkUI(GtkPluginBase):
         """Triggers when plugin is enabled."""
         LOGGER.info('Enabling WebAPI plugin GTK ...')
 
-        self.glade = gtk.glade.XML(get_resource('config.glade'))
+        self.builder = Gtk.Builder.new_from_file(get_resource("config.ui"))
 
-        component.get('Preferences').add_page('WebAPI', self.glade.get_widget('prefs_box'))
+        component.get('Preferences').add_page('WebAPI', self.builder.get_object('prefs_box'))
         component.get('PluginManager').register_hook('on_apply_prefs', self.on_apply_prefs)
         component.get('PluginManager').register_hook('on_show_prefs', self.on_show_prefs)
 
-        self.glade.get_widget('add_button').connect('clicked', self.add_domain)
-        self.glade.get_widget('remove_button').connect('clicked', self.remove_domain)
-        self.glade.get_widget('remove_all_button').connect('clicked', self.remove_all_domain)
+        self.builder.get_object('add_button').connect('clicked', self.add_domain)
+        self.builder.get_object('remove_button').connect('clicked', self.remove_domain)
+        self.builder.get_object('remove_all_button').connect('clicked', self.remove_all_domain)
         self.create_listview()
 
     def disable(self):
@@ -40,7 +40,7 @@ class GtkUI(GtkPluginBase):
     def on_apply_prefs(self):
         """Triggers when plugin prefs are apply."""
         config = {}
-        if self.glade.get_widget('enable_cors').get_active():
+        if self.builder.get_object('enable_cors').get_active():
             config['enable_cors'] = True
         else:
             config['enable_cors'] = False
@@ -58,23 +58,23 @@ class GtkUI(GtkPluginBase):
 
     def cb_get_config(self, config):
         """callback for on show_prefs"""
-        self.glade.get_widget('enable_cors').set_active(config['enable_cors'])
+        self.builder.get_object('enable_cors').set_active(config['enable_cors'])
         self.remove_all_domain()
         for domain in config['allowed_origin']:
             self.model.append([domain])
 
     def create_listview(self):
-        self.model = gtk.ListStore(str)
-        self.list = self.glade.get_widget('listview_allowed_domains')
+        self.model = Gtk.ListStore(str)
+        self.list = self.builder.get_object('listview_allowed_domains')
         self.list.set_model(self.model)
 
         parent = self.list.get_parent()
         parent.remove(self.list)
-        self.scrollTree = self.glade.get_widget('scrolledwindow_allowed_domains')
-        self.scrollTree.set_policy(gtk.POLICY_NEVER, gtk.POLICY_AUTOMATIC)
+        self.scrollTree = self.builder.get_object('scrolledwindow_allowed_domains')
+        self.scrollTree.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
         self.scrollTree.add(self.list)
 
-        column = gtk.TreeViewColumn('domain', gtk.CellRendererText(), text=0)
+        column = Gtk.TreeViewColumn('domain', Gtk.CellRendererText(), text=0)
         column.set_clickable(True)
         column.set_resizable(True)
         self.list.append_column(column)
@@ -82,7 +82,7 @@ class GtkUI(GtkPluginBase):
         self.selection = self.list.get_selection()
 
     def add_domain(self, button):
-        domain = self.glade.get_widget('new_domain').get_text()
+        domain = self.builder.get_object('new_domain').get_text()
         self.model.append([domain])
 
     def remove_domain(self, button):

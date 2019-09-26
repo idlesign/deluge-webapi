@@ -1,6 +1,11 @@
 deluge-webapi changelog
 =======================
 
+v0.4.0
+------
+* Added support for Deluge 2
+* get_torrents will now accept a comma separated string in addition to accepting a list for field filters
+* Future support for Deluge 1.x is no longer possible, please use the older eggs
 
 v0.3.1
 ------
