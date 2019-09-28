@@ -6,9 +6,6 @@ https://github.com/idlesign/deluge-webapi
 .. image:: https://img.shields.io/pypi/v/deluge-webapi.svg
     :target: https://pypi.python.org/pypi/deluge-webapi
 
-.. image:: https://landscape.io/github/idlesign/deluge-webapi/master/landscape.svg?style=plastic
-   :target: https://landscape.io/github/idlesign/deluge-webapi/master
-
 
 Description
 -----------
