@@ -33,7 +33,10 @@ class WebUI(WebPluginBase):
         if params is None:
             filter_fields = ['name', 'comment', 'hash', 'save_path']
         else:
-            filter_fields = params
+            if isinstance(params, list):
+                filter_fields = params
+            else:
+                filter_fields = params.replace(" ","").split(",")
 
         proxy = component.get('SessionProxy')
 
@@ -49,7 +52,7 @@ class WebUI(WebPluginBase):
         deffered_torrents = proxy.get_torrents_status(filter_dict, filter_fields)
 
         def on_complete(torrents_dict):
-            document['torrents'] = torrents_dict.values()
+            document['torrents'] = list(torrents_dict.values())
             response.callback(document)
         deffered_torrents.addCallback(on_complete)
 
@@ -73,8 +76,6 @@ class WebUI(WebPluginBase):
 
         if 'download_location' not in options.keys():
             options.update({'download_location': coreconfig.get("download_location")})
-
-        metainfo = metainfo.encode()
 
         if common.is_magnet(metainfo):
             LOGGER.info('Adding torrent from magnet URI `%s` using options `%s` ...', metainfo, options)

@@ -27,7 +27,8 @@ Supported methods:
 
 Deluge is a lightweight, Free Software, cross-platform BitTorrent client. Download it at http://deluge-torrent.org/
 
-.. note:: Plugin tested on Deluge 1.3.15.
+.. note:: Use egg version 0.4.0 or higher for Deluge 2
+.. note:: Use egg version 0.3.2 or lower for Deluge 1.x
 
 
 Installation
