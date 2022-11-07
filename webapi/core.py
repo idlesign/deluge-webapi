@@ -2,9 +2,11 @@ import logging
 
 import deluge.configmanager
 from deluge import component
+from deluge.common import get_version
 from deluge.core.rpcserver import export
 from deluge.plugins.pluginbase import CorePluginBase
 from twisted.web import http, server
+from packaging import version
 
 LOGGER = logging.getLogger(__name__)
 
@@ -80,7 +82,10 @@ class Core(CorePluginBase):
 
     def render_patch(self, request):
 
-        if request.method != 'OPTIONS' and request.method != b'OPTIONS':
+        # twisted uses byte strings in deluge version 2.1.0 onward
+        use_bytes = version.parse(get_version()) >= version.parse('2.1.0')
+
+        if request.method != (b'OPTIONS' if use_bytes else 'OPTIONS'):
             return self.old_render(request)
 
         request.setResponseCode(http.OK)
@@ -92,7 +97,7 @@ class Core(CorePluginBase):
             request.setHeader('Access-Control-Allow-Methods', 'POST')
             request.setHeader('Access-Control-Allow-Credentials', 'true')
 
-        request.write(b'')
+        request.write(b'' if use_bytes else '')
         request.finish()
         return server.NOT_DONE_YET
 
