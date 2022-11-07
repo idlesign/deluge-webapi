@@ -80,7 +80,7 @@ class Core(CorePluginBase):
 
     def render_patch(self, request):
 
-        if request.method != 'OPTIONS':
+        if request.method != 'OPTIONS' and request.method != b'OPTIONS':
             return self.old_render(request)
 
         request.setResponseCode(http.OK)
@@ -92,7 +92,7 @@ class Core(CorePluginBase):
             request.setHeader('Access-Control-Allow-Methods', 'POST')
             request.setHeader('Access-Control-Allow-Credentials', 'true')
 
-        request.write('')
+        request.write(b'')
         request.finish()
         return server.NOT_DONE_YET
 
