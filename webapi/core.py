@@ -15,6 +15,8 @@ DEFAULT_PREFS = {
     'allowed_origin': [],
 }
 
+# twisted uses byte strings in deluge version 2.1.0 onward
+use_bytes = version.parse(get_version()) >= version.parse('2.1.0')
 
 class Core(CorePluginBase):
 
@@ -81,9 +83,6 @@ class Core(CorePluginBase):
         self.patched = False
 
     def render_patch(self, request):
-
-        # twisted uses byte strings in deluge version 2.1.0 onward
-        use_bytes = version.parse(get_version()) >= version.parse('2.1.0')
 
         if request.method != (b'OPTIONS' if use_bytes else 'OPTIONS'):
             return self.old_render(request)
