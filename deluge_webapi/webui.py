@@ -1,12 +1,14 @@
 import logging
 
+import deluge.configmanager
 from deluge import component, common
 from deluge.plugins.pluginbase import WebPluginBase
 from deluge.ui.client import client
 from deluge.ui.web.json_api import export as export_api
 from twisted.internet.defer import Deferred
+from twisted.web import http, server
 
-from .common import get_resource
+from .common import DEFAULT_PREFS, get_resource, use_bytes
 
 LOGGER = logging.getLogger(__name__)
 
@@ -19,9 +21,84 @@ class WebUI(WebPluginBase):
         """Triggers when plugin is enabled."""
         LOGGER.info('Enabling WebAPI plugin WEB ...')
 
+        self.patched = False
+        self.config = deluge.configmanager.ConfigManager('webapi.conf', DEFAULT_PREFS)
+
+        if self.config['enable_cors']:
+            self.patch_web_ui()
+
     def disable(self):
         """Triggers when plugin is disabled."""
         LOGGER.info('Disabling WebAPI plugin WEB ...')
+
+        self.unpatch_web_ui()
+
+    def patch_web_ui(self):
+        """Applies CORS headers patching to the WebUI JSON component."""
+
+        if self.patched:
+            return
+
+        LOGGER.info('Patching webui for CORS ...')
+
+        try:
+            cmp_json = component.get('JSON')
+
+        except KeyError:
+            LOGGER.warning('The JSON component is not available in this process. CORS patching is skipped.')
+            return
+
+        self.old_render = cmp_json.render
+        self.old_send_request = cmp_json._send_response
+        cmp_json.render = self.render_patch
+        cmp_json._send_response = self._send_response_patch
+
+        self.patched = True
+
+    def unpatch_web_ui(self):
+        """Reverts CORS headers patching of the WebUI JSON component."""
+
+        if not self.patched:
+            return
+
+        LOGGER.info('Unpatching webui for CORS ...')
+
+        cmp_json = component.get('JSON')
+        cmp_json.render = self.old_render
+        cmp_json._send_response = self.old_send_request
+
+        self.patched = False
+
+    def render_patch(self, request):
+
+        if request.method != (b'OPTIONS' if use_bytes else 'OPTIONS'):
+            return self.old_render(request)
+
+        request.setResponseCode(http.OK)
+        origin = request.getHeader('Origin')
+
+        if origin in self.config['allowed_origin']:
+            request.setHeader('Access-Control-Allow-Origin', origin)
+            request.setHeader('Access-Control-Allow-Headers', 'content-type')
+            request.setHeader('Access-Control-Allow-Methods', 'POST')
+            request.setHeader('Access-Control-Allow-Credentials', 'true')
+
+        request.write(b'' if use_bytes else '')
+        request.finish()
+        return server.NOT_DONE_YET
+
+    def _send_response_patch(self, request, response):
+
+        if request._disconnected:
+            return ''
+
+        origin = request.getHeader('Origin')
+
+        if origin in self.config['allowed_origin']:
+            request.setHeader('Access-Control-Allow-Origin', origin)
+            request.setHeader('Access-Control-Allow-Credentials', 'true')
+
+        return self.old_send_request(request, response)
 
     @export_api
     def get_torrents(self, ids=None, params=None):
