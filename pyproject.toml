@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "deluge-webapi"
+version = "0.5.0"
+description = "Plugin for Deluge WebUI providing sane JSON API."
+readme = "README.rst"
+license = {text = "BSD 3-Clause License"}
+authors = [
+    {name = "Igor `idle sign` Starikov", email = "idlesign@yandex.ru"},
+]
+requires-python = ">=3.10"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: BSD License",
+    "Environment :: Plugins",
+    "Intended Audience :: End Users/Desktop",
+]
+
+[project.urls]
+Homepage = "https://github.com/idlesign/deluge-webapi"
+
+[project.entry-points."deluge.plugin.core"]
+WebAPI = "deluge_webapi:CorePlugin"
+
+[project.entry-points."deluge.plugin.gtk3ui"]
+WebAPI = "deluge_webapi:Gtk3UIPlugin"
+
+[project.entry-points."deluge.plugin.web"]
+WebAPI = "deluge_webapi:WebUIPlugin"
+
+[tool.setuptools]
+packages = ["deluge_webapi"]
+
+[tool.setuptools.package-data]
+deluge_webapi = ["data/*"]

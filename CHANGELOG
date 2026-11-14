@@ -1,8 +1,8 @@
 deluge-webapi changelog
 =======================
 
-unreleased
-----------
+v0.5.0
+------
 * CORS patching is moved into the WebUI part of the plugin, where the JSON component lives, fixing KeyError: 'JSON' when the WebUI and the daemon run in separate processes; changing CORS settings now requires a WebUI restart (close #36)
 * The plugin package is renamed into `deluge_webapi` to comply with the Deluge 2 plugin naming requirements (close #25)
 
