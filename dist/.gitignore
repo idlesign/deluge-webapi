@@ -1,0 +1,4 @@
+# Only eggs are kept under version control here.
+*
+!.gitignore
+!*.egg
