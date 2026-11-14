@@ -10,6 +10,7 @@ set -euo pipefail
 cd "$(dirname "$0")"
 
 rm -rf build/ deluge_webapi.egg-info/
+rm -f dist/*.tar.gz dist/*.whl
 
 echo ">>> Building the egg ..."
 python3 -c "from setuptools import setup; setup()" bdist_egg -q
