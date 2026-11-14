@@ -95,5 +95,5 @@ class WebUI(WebPluginBase):
     @export_api
     def get_api_version(self):
         """Returns WebAPI plugin version."""
-        from webapi import VERSION
+        from . import VERSION
         return '.'.join(map(str, VERSION))

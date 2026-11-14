@@ -1,6 +1,6 @@
 import os
 from setuptools import setup
-from webapi import VERSION
+from deluge_webapi import VERSION
 
 
 PATH_BASE = os.path.dirname(__file__)
@@ -24,7 +24,7 @@ __license__ = 'BSD 3-Clause License'
 __url__ = 'https://github.com/idlesign/deluge-webapi'
 
 
-__pkg_data__ = {__plugin_name__.lower(): ['data/*']}
+__pkg_data__ = {'deluge_webapi': ['data/*']}
 
 setup(
     name=__plugin_name__,
@@ -38,7 +38,7 @@ setup(
     author=__author__,
     author_email=__author_email__,
 
-    packages=['webapi'],
+    packages=['deluge_webapi'],
     include_package_data=True,
     zip_safe=False,
     package_data = __pkg_data__,
@@ -67,5 +67,5 @@ setup(
     %s = %s:Gtk3UIPlugin
     [deluge.plugin.web]
     %s = %s:WebUIPlugin
-    """ % ((__plugin_name__, __plugin_name__.lower())*3)
+    """ % ((__plugin_name__, 'deluge_webapi')*3)
 )

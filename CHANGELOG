@@ -1,6 +1,10 @@
 deluge-webapi changelog
 =======================
 
+unreleased
+----------
+* The plugin package is renamed into `deluge_webapi` to comply with the Deluge 2 plugin naming requirements (close #25)
+
 v0.4.0
 ------
 * Added support for Deluge 2
