@@ -40,9 +40,18 @@ Installation
 4. In case you use Client-Server setup, you'll need to install the plugin both on client and server, see - https://dev.deluge-torrent.org/wiki/Plugins#Client-ServerSetups
 
 
+CORS
+----
+
+CORS headers can be enabled in the plugin settings along with a list of allowed origins.
+The settings are applied when the Web UI plugin part is enabled, so changing them requires
+a Web UI restart to take effect.
+
+
 .. note::
 
-    To build .egg file from source code yourself use ``python setup.py bdist_egg`` command in source code directory.
+    To build the .egg file from source code yourself use ``python -c "from setuptools import setup; setup()" bdist_egg``
+    in the source code directory (or ``./pub.sh`` to build and publish).
 
 
 Documentation
